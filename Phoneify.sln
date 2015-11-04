@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoneify", "Phoneify\Phoneify.csproj", "{07A21C22-3014-4FC5-930A-94CA0596205D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoneify.Tests", "Phoneify.Tests\Phoneify.Tests.csproj", "{B513A9E1-1008-4D77-95BE-A8EA317913EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07A21C22-3014-4FC5-930A-94CA0596205D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A21C22-3014-4FC5-930A-94CA0596205D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A21C22-3014-4FC5-930A-94CA0596205D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A21C22-3014-4FC5-930A-94CA0596205D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B513A9E1-1008-4D77-95BE-A8EA317913EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B513A9E1-1008-4D77-95BE-A8EA317913EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B513A9E1-1008-4D77-95BE-A8EA317913EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B513A9E1-1008-4D77-95BE-A8EA317913EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
