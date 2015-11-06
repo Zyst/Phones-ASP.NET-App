@@ -185,12 +185,42 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\embarrassed_woman.jpg" />
+    <Content Include="Content\Images\Embarrassed_woman2.jpg" />
+    <Content Include="Content\material-fullpalette.css" />
+    <Content Include="Content\material-fullpalette.min.css" />
+    <Content Include="Content\material.css" />
+    <Content Include="Content\material.min.css" />
+    <Content Include="Content\ripples.css" />
+    <Content Include="Content\ripples.min.css" />
+    <Content Include="Content\roboto.css" />
+    <Content Include="Content\roboto.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Material-Design-Icons.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\material-fullpalette.css.map" />
+    <Content Include="Content\material-fullpalette.min.css.map" />
+    <Content Include="Content\material.css.map" />
+    <Content Include="Content\material.min.css.map" />
+    <Content Include="Content\ripples.css.map" />
+    <Content Include="Content\ripples.min.css.map" />
+    <Content Include="Content\roboto.css.map" />
+    <Content Include="Content\roboto.min.css.map" />
+    <Content Include="fonts\Material-Design-Icons.eot" />
+    <Content Include="fonts\Material-Design-Icons.ttf" />
+    <Content Include="fonts\Material-Design-Icons.woff" />
+    <Content Include="fonts\RobotoDraftBold.woff" />
+    <Content Include="fonts\RobotoDraftBold.woff2" />
+    <Content Include="fonts\RobotoDraftItalic.woff" />
+    <Content Include="fonts\RobotoDraftItalic.woff2" />
+    <Content Include="fonts\RobotoDraftMedium.woff" />
+    <Content Include="fonts\RobotoDraftMedium.woff2" />
+    <Content Include="fonts\RobotoDraftRegular.woff" />
+    <Content Include="fonts\RobotoDraftRegular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -199,9 +229,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\material.js" />
+    <Content Include="Scripts\material.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ripples.js" />
+    <Content Include="Scripts\ripples.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -242,15 +276,20 @@
     <Content Include="Views\Phones\Details.cshtml" />
     <Content Include="Views\Phones\Edit.cshtml" />
     <Content Include="Views\Phones\Index.cshtml" />
+    <Content Include="Scripts\material.min.js.map" />
+    <Content Include="Scripts\ripples.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\App\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

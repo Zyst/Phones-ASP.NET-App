@@ -12,7 +12,6 @@ namespace Phoneify.Models
     /// </summary>
     public class Phone
     {
-        // TODO: Confirm everything here is what we want before scaffolding
         [Required]
         public virtual int PhoneId { get; set; }
 
@@ -27,20 +26,22 @@ namespace Phoneify.Models
 
         [Required]
         [Display(Name = "Phone Type")]
+        [Range(0, 2, ErrorMessage = "No hackers in here please!")]
         public virtual PhoneType PhoneType { get; set; }
 
-        // TODO: Find some open source code that does the Phone validation code for us.
         /// <summary>
         /// Phone number, validations on it are still a bit of a work in progress.
         /// </summary>
         [Required]
-        [DataType(DataType.PhoneNumber)]
+        [Phone(ErrorMessage = "This doesn't look like a valid phone number.")]
         [Display(Name = "Phone Number")]
         public virtual string PhoneNumber { get; set; }
     }
 
     /// <summary>
-    /// Enum listing phone types, to add more phone types just add them here.
+    /// Enum listing phone types. 
+    /// 
+    /// To add more phone types just add them here, and edit the range in PhoneType above.
     /// </summary>
     public enum PhoneType
     {
