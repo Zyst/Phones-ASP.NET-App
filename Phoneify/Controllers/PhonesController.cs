@@ -43,16 +43,18 @@ namespace Phoneify.Controllers
             return View();
         }
 
-        // TODO: Make Username autobound in Create
         // POST: Phones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "PhoneId,Username,PhoneType,PhoneNumber")] Phone phone)
         {
             if (ModelState.IsValid)
             {
+                phone.Username = User.Identity.Name;
+
                 db.Phones.Add(phone);
                 db.SaveChanges();
                 return RedirectToAction("Index");
