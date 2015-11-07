@@ -8,8 +8,6 @@ namespace Phoneify.Controllers
 {
     public class HomeController : Controller
     {
-        // TODO: Remove unused views and controllers, about, contact.
-
         public ActionResult Index()
         {
             return View();

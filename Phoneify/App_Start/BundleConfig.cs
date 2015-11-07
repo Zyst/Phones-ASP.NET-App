@@ -25,8 +25,6 @@ namespace Phoneify
                       "~/Scripts/ripples.js",
                       "~/Scripts/material.js"));
 
-            // TODO: Add bootstrap material, lets make this program great again.
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/roboto.css",

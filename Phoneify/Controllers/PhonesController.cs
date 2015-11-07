@@ -16,6 +16,10 @@ namespace Phoneify.Controllers
 
         // TODO: Consider which Controllers should not allow anonymous access
 
+        // TODO: Make it so that individual users can only access their own Phone numbers
+
+        // TODO: Remove the Index() view username reference once we are sure everything is working properly.
+
         // GET: Phones
         public ActionResult Index()
         {
