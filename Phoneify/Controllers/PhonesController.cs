@@ -14,19 +14,19 @@ namespace Phoneify.Controllers
     {
         private PhoneifyDB db = new PhoneifyDB();
 
-        // TODO: Consider which Controllers should not allow anonymous access
-
-        // TODO: Make it so that individual users can only access their own Phone numbers
-
-        // TODO: Remove the Index() view username reference once we are sure everything is working properly.
+        // TODO: Create a new view for administrators to view every Phone
 
         // GET: Phones
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Phones.ToList());
+            // return View(db.Phones.ToList()); // This one returns everything
+
+            return View(Phone.PhonesByUser(User.Identity.Name)); // Only return the appropriate users
         }
 
         // GET: Phones/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,10 +38,16 @@ namespace Phoneify.Controllers
             {
                 return HttpNotFound();
             }
-            return View(phone);
+            if (Phone.DoesUserMatchOrAdmin(phone, User.Identity.Name))
+            {
+                return View(phone);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            
         }
 
         // GET: Phones/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -68,6 +74,7 @@ namespace Phoneify.Controllers
         }
 
         // GET: Phones/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,7 +86,11 @@ namespace Phoneify.Controllers
             {
                 return HttpNotFound();
             }
-            return View(phone);
+            if (Phone.DoesUserMatchOrAdmin(phone, User.Identity.Name))
+            {
+                return View(phone);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
 
         // POST: Phones/Edit/5
@@ -87,10 +98,12 @@ namespace Phoneify.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PhoneId,Username,PhoneType,PhoneNumber")] Phone phone)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "PhoneId,PhoneType,PhoneNumber")] Phone phone)
         {
             if (ModelState.IsValid)
             {
+                phone.Username = User.Identity.Name; 
                 db.Entry(phone).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,6 +112,7 @@ namespace Phoneify.Controllers
         }
 
         // GET: Phones/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,18 +124,27 @@ namespace Phoneify.Controllers
             {
                 return HttpNotFound();
             }
-            return View(phone);
+            if (Phone.DoesUserMatchOrAdmin(phone, User.Identity.Name))
+            {
+                return View(phone);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
 
         // POST: Phones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Phone phone = db.Phones.Find(id);
-            db.Phones.Remove(phone);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Phone phone = db.Phones.Find(id); // Individual Phone Check
+            if (Phone.DoesUserMatchOrAdmin(phone, User.Identity.Name))
+            {
+                db.Phones.Remove(phone);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
 
         protected override void Dispose(bool disposing)

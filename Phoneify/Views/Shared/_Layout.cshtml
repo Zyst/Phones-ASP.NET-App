@@ -20,9 +20,21 @@
                 @Html.ActionLink("Phoneify", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Numbers", "Index", "Phones")</li>
-                </ul>
+
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("My Numbers", "Index", "Phones")</li>
+                    </ul>
+                }
+
+                @* 
+                For role checking we can use:
+                @if (Request.IsAuthenticated && User.IsInRole("Administrators"))
+
+                That should be considered for the one with the admin thing
+                 *@
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

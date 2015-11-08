@@ -36,6 +36,30 @@ namespace Phoneify.Models
         [Phone(ErrorMessage = "This doesn't look like a valid phone number.")]
         [Display(Name = "Phone Number")]
         public virtual string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Takes in a Phone and a String, and checks if the Phone number belongs to the String. Validation created to do CRUD on Phone.
+        /// </summary>
+        /// <param name="phoneToCheck">A Phone object in the database</param>
+        /// <param name="usernameToCheck">Usually User.Identity.Name, must be our username</param>
+        /// <returns>True if Phone.Username is equal to the Username to check, false otherwise.</returns>
+        public static bool DoesUserMatchOrAdmin(Phone phoneToCheck, string usernameToCheck)
+        {
+            // TODO: Add the admin logic if relevant
+            return String.Equals(phoneToCheck.Username, usernameToCheck);
+        }
+
+        /// <summary>
+        /// Gets all the phones that a user owns and returns them as a List.
+        /// </summary>
+        /// <param name="usernameToGet">The user who you are checking for phones</param>
+        /// <returns>List of phones a user owns.</returns>
+        public static List<Phone> PhonesByUser(string usernameToGet)
+        {
+            PhoneifyDB db = new PhoneifyDB();
+
+            return db.Phones.Where(phone => phone.Username == usernameToGet).ToList();
+        }
     }
 
     /// <summary>
