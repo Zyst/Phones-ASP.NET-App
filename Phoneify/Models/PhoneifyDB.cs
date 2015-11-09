@@ -21,4 +21,14 @@ namespace Phoneify.Models
 
         public System.Data.Entity.DbSet<Phoneify.Models.Phone> Phones { get; set; }
     }
+
+    public class PhoneifyDBInitializer : System.Data.Entity.DropCreateDatabaseAlways<PhoneifyDB>
+    {
+        protected override void Seed(PhoneifyDB context)
+        {
+            // TODO: Seed database with Phones and users
+            
+            base.Seed(context);
+        }
+    }
 }

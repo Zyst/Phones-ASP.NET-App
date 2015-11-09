@@ -94,16 +94,21 @@ namespace Phoneify.Controllers
         }
 
         // POST: Phones/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PhoneId,PhoneType,PhoneNumber")] Phone phone)
         {
+            Phone originalPhone = db.Phones.Find(phone.PhoneId);
+
+            if (!Phone.DoesUserMatchOrAdmin(originalPhone, User.Identity.Name))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             if (ModelState.IsValid)
             {
-                phone.Username = User.Identity.Name; 
+                phone.Username = originalPhone.Username;
                 db.Entry(phone).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -137,7 +142,7 @@ namespace Phoneify.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Phone phone = db.Phones.Find(id); // Individual Phone Check
+            Phone phone = db.Phones.Find(id);
             if (Phone.DoesUserMatchOrAdmin(phone, User.Identity.Name))
             {
                 db.Phones.Remove(phone);

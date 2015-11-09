@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace Phoneify.Models
 {
@@ -79,6 +82,27 @@ namespace Phoneify.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        /// <summary>
+        /// User First Name.
+        /// </summary>
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// User birthday
+        /// </summary>
+        [Required]
+        [Display(Name = "Birthday")]
+        [DataType(DataType.DateTime)]
+        public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// An image file belonging to the user
+        /// </summary>
+        [Display(Name = "Avatar")]
+        public HttpPostedFileBase Avatar { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -3,6 +3,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.Web;
 
 namespace Phoneify.Models
 {
@@ -16,6 +21,26 @@ namespace Phoneify.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        /// <summary>
+        /// User First Name.
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// User birthday
+        /// </summary>
+        public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// An image file belonging to the user as a string in our filepath.
+        /// </summary>
+        public string Avatar { get; set; }
+
+        /// <summary>
+        /// The Phones belonging to this user
+        /// </summary>
+        public List<Phone> Phones { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

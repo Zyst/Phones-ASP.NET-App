@@ -689,7 +689,7 @@
     <Content Include="Scripts\ripples.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Users\Avatars\" />
     <Folder Include="Scripts\App\" />
   </ItemGroup>
   <ItemGroup>

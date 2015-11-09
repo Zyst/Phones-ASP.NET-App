@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Phoneify.Models;
+using System.IO;
 
 namespace Phoneify.Controllers
 {
@@ -151,7 +152,43 @@ namespace Phoneify.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                // TODO: Image logic
+                var validImageTypes = new string[]
+                {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/pjpeg",
+                    "image/png"
+                };
+
+                // Check that the image isn't empty, and that the filetype is jpg, gif, or png.
+                if (model.Avatar == null || model.Avatar.ContentLength == 0)
+                {
+                    ModelState.AddModelError("Avatar", "You must upload an avatar.");
+                }
+                else if (!validImageTypes.Contains(model.Avatar.ContentType))
+                {
+                    ModelState.AddModelError("Avatar", "Please choose a GIF, JPG or PNG image.");
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    FirstName = model.FirstName,
+                    Email = model.Email,
+                    Birthday = model.Birthday
+                }; // New properties got added here
+
+                if (model.Avatar != null && model.Avatar.ContentLength > 0)
+                {
+                    var uploadDir = "~/App_Data/Users/Avatars";
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.Avatar.FileName);
+                    var imageUrl  = Path.Combine(uploadDir, model.Avatar.FileName);
+
+                    model.Avatar.SaveAs(imagePath);
+                    user.Avatar = imageUrl;
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
