@@ -165,10 +165,12 @@ namespace Phoneify.Controllers
                 if (model.Avatar == null || model.Avatar.ContentLength == 0)
                 {
                     ModelState.AddModelError("Avatar", "You must upload an avatar.");
+                    return View(model);
                 }
                 else if (!validImageTypes.Contains(model.Avatar.ContentType))
                 {
                     ModelState.AddModelError("Avatar", "Please choose a GIF, JPG or PNG image.");
+                    return View(model);
                 }
 
                 var user = new ApplicationUser

@@ -16,7 +16,7 @@ namespace Phoneify
         {
             // TODO: See how to merge user and Phoneify db
             Database.SetInitializer(new PhoneifyDBInitializer());
-            Database.SetInitializer<ApplicationDbContext>(null);
+            Database.SetInitializer(new ApplicationDBInitializer());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

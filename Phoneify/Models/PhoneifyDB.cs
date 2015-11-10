@@ -26,8 +26,17 @@ namespace Phoneify.Models
     {
         protected override void Seed(PhoneifyDB context)
         {
-            // TODO: Seed database with Phones and users
+            // TODO: Seed database with Phones
             
+            base.Seed(context);
+        }
+    }
+
+    public class ApplicationDBInitializer : System.Data.Entity.DropCreateDatabaseAlways<ApplicationDbContext>
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            // TODO: Seed database with Users
             base.Seed(context);
         }
     }
