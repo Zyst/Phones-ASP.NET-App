@@ -2,16 +2,31 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
+using System.ComponentModel;
+using System.Web;
 
 namespace Phoneify.Models
 {
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }
-        public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        /// <summary>
+        /// User birthday
+        /// </summary>
+        [ReadOnly(true)]
+        public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// Avatar URL to display the current user image.
+        /// </summary>
+        [ReadOnly(true)]
+        public string AvatarUrl { get; set; }
+
+        [Display(Name = "Avatar")]
+        public HttpPostedFileBase NewAvatar { get; set; }
     }
 
     public class ManageLoginsViewModel

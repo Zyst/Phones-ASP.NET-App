@@ -152,7 +152,7 @@ namespace Phoneify.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Image logic
+                // TODO: Add Datepicker to the front end
                 var validImageTypes = new string[]
                 {
                     "image/gif",
