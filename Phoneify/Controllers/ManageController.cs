@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Phoneify.Models;
+using System.IO;
 
 namespace Phoneify.Controllers
 {
@@ -61,6 +62,7 @@ namespace Phoneify.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeAvatarSuccess ? "Your avatar was changed successfully."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -73,6 +75,52 @@ namespace Phoneify.Controllers
                 AvatarUrl = user.Avatar
             };
             return View(model);
+        }
+
+        // POST: /Manage/UpdateAvatar
+        [HttpPost]
+        public ActionResult UpdateAvatar(IndexViewModel model)
+        {
+            ManageMessageId? message;
+
+            var validImageTypes = new string[]
+            {
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png"
+            };
+
+            // Check that the image isn't empty, and that the filetype is jpg, gif, or png.
+            if (model.NewAvatar == null || model.NewAvatar.ContentLength == 0)
+            {
+                ModelState.AddModelError("NewAvatar", "You must upload an avatar.");
+                return View(model);
+            }
+            else if (!validImageTypes.Contains(model.NewAvatar.ContentType))
+            {
+                ModelState.AddModelError("NewAvatar", "Please choose a GIF, JPG or PNG image.");
+                return View(model);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
+
+            // Recheck, then save and assign user avatar change.
+            if (model.NewAvatar != null && model.NewAvatar.ContentLength > 0)
+            {
+                var uploadDir = "~/Content/Uploads/Users/Avatars";
+                var imagePath = Path.Combine(Server.MapPath(uploadDir), model.NewAvatar.FileName);
+                var imageUrl = Path.Combine(uploadDir, model.NewAvatar.FileName);
+
+                model.NewAvatar.SaveAs(imagePath);
+                user.Avatar = imageUrl;
+            }
+
+            var result = UserManager.Update(user);
+
+            message = ManageMessageId.ChangeAvatarSuccess;
+            return RedirectToAction("Index", new { Message = message });
         }
 
         //
@@ -379,6 +427,7 @@ namespace Phoneify.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ChangeAvatarSuccess,
             Error
         }
 

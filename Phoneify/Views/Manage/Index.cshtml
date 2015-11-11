@@ -28,10 +28,34 @@
             <dd>
                 @Model.Birthday.ToString("dd MMM yyyy")
             </dd>
-            <dt>Avatar</dt>
+            <div id="Avatar">
+                <dt>Avatar</dt>
+                <dd>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <img class="img-responsive img-thumbnail" src="@Url.Content(Model.AvatarUrl)" alt="Avatar" />
+                        </div>
+                    </div>
+                    @* Add image logic here *@
+                </dd>
+            </div>
+            <br/>
+            <dt>New avatar:</dt>
             <dd>
-                @* Add image logic here *@
+                <form action="/Manage/UpdateAvatar" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.NewAvatar, new { type = "file" })
+
+                        <button type="submit" class="btn btn-primary">
+                            Change thy avatar
+                        </button>
+                    </div>
+                </form>
             </dd>
         </dl>
     </div>
 </div>
+
+@section Scripts {
+    
+}

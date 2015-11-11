@@ -183,7 +183,7 @@ namespace Phoneify.Controllers
 
                 if (model.Avatar != null && model.Avatar.ContentLength > 0)
                 {
-                    var uploadDir = "~/App_Data/Users/Avatars";
+                    var uploadDir = "~/Content/Uploads/Users/Avatars";
                     var imagePath = Path.Combine(Server.MapPath(uploadDir), model.Avatar.FileName);
                     var imageUrl  = Path.Combine(uploadDir, model.Avatar.FileName);
 
