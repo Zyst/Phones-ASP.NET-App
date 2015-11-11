@@ -13,6 +13,7 @@ namespace Phoneify.Controllers
     public class PhonesController : Controller
     {
         private PhoneifyDB db = new PhoneifyDB();
+        private ApplicationDbContext context = new ApplicationDbContext();
 
         // TODO: Create a new view for administrators to view every Phone
 
@@ -150,6 +151,18 @@ namespace Phoneify.Controllers
                 return RedirectToAction("Index");
             }
             return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+        }
+
+        // GET: Phones/Admin
+        [Authorize]
+        public ActionResult Admin()
+        {
+            List<ApplicationUser> users = context.Users.ToList();
+            foreach (var u in users)
+            {
+                u.Phones = Phone.PhonesByUser(u.UserName);
+            }
+            return View(users);
         }
 
         protected override void Dispose(bool disposing)
